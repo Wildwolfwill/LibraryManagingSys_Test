@@ -1,0 +1,89 @@
+package com.ts.main;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.Date;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.text.Document;
+
+public class BookLogin extends JFrame {
+	private static final Operater Type=null;        //人员类型
+	private static final Operater user;
+	private  JPasswordField  password;
+	private JTextField username;
+	private JButton login;
+	private JButton reset;
+	public BookLogin(){
+		super();
+		final BorderLayout  borderLayout=new BorderLayout();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		borderLayout.setVgap(10);
+		getContentPane().setLayout(borderLayout);
+		setTitle("图书馆管理系统登录");
+		
+		Toolkit toolkit=Toolkit.getDefaultToolkit();
+		Dimension  screenSize=toolkit.getScreenSize();
+		setSize(290,190);
+		setLocation((screenSize.width -getWidth())/2,(screenSize.height -getHeight())/2);
+		final JPanel  mainPanel =new JPanel();
+		mainPanel.setLayout(new BorderLayout());
+		mainPanel.setBorder(new EmptyBorder(10,10,2,2));
+		getContentPane().add(mainPanel);
+		
+		final JLabel imageLabel=new JLabel();
+		ImageIcon loginIcon=Icon.add("login.jpg");
+		imageLabel.setIcon(loginIcon);
+		imageLabel.setOpaque(true);
+		imageLabel.setBackground(Color.pink);
+		imageLabel.setPreferredSize(new Dimension(200,50));
+		mainPanel.add(imageLabel,BorderLayout.NORTH);
+		
+		final JPanel  centerPanel =new JPanel();
+		final GridLayout  gridLayout =new GridLayout(2,2);
+		gridLayout.setHgap(6);
+		gridLayout.setVgap(20);
+		centerPanel.setLayout(gridLayout);
+		mainPanel.add(centerPanel);
+		
+		final JLabel userNameLabel=new JLabel();
+		userNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		userNameLabel.setPreferredSize(new Dimension(0,0));
+		centerPanel.add(userNameLabel);
+		userNameLabel.setText("用 户 名");
+		username=new JTextField(20);
+		username.setPreferredSize( new Dimension(0,0));
+		centerPanel.add(username);
+		final JLabel passwordLabel=new JLabel();
+		passwordLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		centerPanel.add(passwordLabel);
+		passwordLabel.setText("密 码：");
+		password=new JPasswordField(20);
+	//	password.setDocument(new Document(6));
+		password.setEchoChar('*');
+		
+		password.addKeyListener(new KeyAdapter(){
+			public void keyPressed (final KeyEvent e ){
+				if (e.getKeyCode()==10)
+					login.doClick();
+			}
+		});
+		centerPanel.add(password);	
+		
+	}
+	
+}
+
